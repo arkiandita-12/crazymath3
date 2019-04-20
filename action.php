@@ -12,9 +12,11 @@
 		// tanggal dan waktu file upload
 		$uploadtime = date('YmdHis');
 		// setting nama sesuai dengan aturan (namauser-tanggal.ext)
-		$uploadfile = $_POST['username'] . "-" . $uploadtime . "." . pathinfo($_FILES['userfile']['name'],PATHINFO_EXTENSION);
+		$ext = explode(".",$_FILES['userfile']['name']);
+		$ext = $ext[1];
+		$uploadfile = $_POST['username'] . "-" . $uploadtime . "." . $ext;
 		// proses uload file ke folder 'data'
-		if (move_uploaded_file($_FILES['userfile']['tmp name'], $uploaddir.$uploadfile)){
+		if (move_uploaded_file($_FILES['userfile']['tmp_name'], $uploaddir.$uploadfile)){
 				echo "File telah diupload";
 		} else {
 				echo "File gagal diupload";
